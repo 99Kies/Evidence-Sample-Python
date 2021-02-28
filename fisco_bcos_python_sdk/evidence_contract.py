@@ -12,7 +12,6 @@ class Evidence_Contract:
         self.contract_abi = data_parser.contract_abi
 
         self.client = BcosClient()
-
         self.to_address = address
 
 
@@ -57,33 +56,33 @@ class Evidence_Contract:
     def get_signers(self):
         signers = self.client.call(self.to_address, self.contract_abi, "getSigners", [])
         return {
-            "signers": signers
+            "signers": signers[0]
         }
 
-contract_address = "0xa2a9d06c3478778e2302bac12115c128334915f4"
-a = Evidence_Contract(contract_address)
-
+# contract_address = "0xa2a9d06c3478778e2302bac12115c128334915f4"
+# a = Evidence_Contract(contract_address)
+#
+# # a.client.set_account_by_keystorefile("fengfeng.keystore")
+# # a.client.set_account_by_keystorefile("fengfeng2.keystore")
+# fengfeng_privkey = "d6f8c8f9106835ccc8f8d0bbc4b5bf32ff5f8941e69f9f50d075684d10dda7be"
+# fengfeng2_privkey = "619834a32f41fc9dce7809c3063070af3d78fac577a0c12705984eed0b1a3cb"
+#
+# a.client.set_account_by_privkey(fengfeng2_privkey)
+#
+# print(a.client.keypair.address)
+# print("new evidence")
+#
+# t = a.new_evidence_by_evi("Hello, world")
+# print(t)
+# print(a.get_evidence_by_address(t["result"][0]["address"]))
+#
+# print(a.add_signatures_by_evi_address(t["result"][0]["address"]))
+# print(a.get_evidence_by_address(t["result"][0]["address"]))
+#
+# print("==================== 切换账户 ====================")
+# print("==================== 添加多签用户 ====================")
+#
 # a.client.set_account_by_keystorefile("fengfeng.keystore")
-# a.client.set_account_by_keystorefile("fengfeng2.keystore")
-fengfeng_privkey = "d6f8c8f9106835ccc8f8d0bbc4b5bf32ff5f8941e69f9f50d075684d10dda7be"
-fengfeng2_privkey = "619834a32f41fc9dce7809c3063070af3d78fac577a0c12705984eed0b1a3cb"
-
-a.client.set_account_by_privkey(fengfeng2_privkey)
-
-print(a.client.keypair.address)
-print("new evidence")
-
-t = a.new_evidence_by_evi("Hello, world")
-print(t)
-print(a.get_evidence_by_address(t["result"][0]["address"]))
-
-print(a.add_signatures_by_evi_address(t["result"][0]["address"]))
-print(a.get_evidence_by_address(t["result"][0]["address"]))
-
-print("==================== 切换账户 ====================")
-print("==================== 添加多签用户 ====================")
-
-a.client.set_account_by_keystorefile("fengfeng.keystore")
-
-print(a.add_signatures_by_evi_address(t["result"][0]["address"]))
-print(a.get_evidence_by_address(t["result"][0]["address"]))
+#
+# print(a.add_signatures_by_evi_address(t["result"][0]["address"]))
+# print(a.get_evidence_by_address(t["result"][0]["address"]))

@@ -21,7 +21,7 @@ def new_evidence():
     new_evi = evidence.new_evidence_by_evi(evidence_string)
     return jsonify(new_evi), 200
 
-@app.route("/evidence/<address>")
+@app.route("/evidence/<address>", methods=["GET", "POST"])
 def show_evidence(address):
     try:
         evidence = Evidence_Contract(contract_address)
@@ -30,7 +30,7 @@ def show_evidence(address):
     except Exception as e:
         return jsonify({"error": e}), 400
 
-@app.route("/addsignatures")
+@app.route("/addsignatures", methods=["GET", "POST"])
 def add_sinatures():
     data = request.get_json()
     if data is None:
@@ -45,7 +45,7 @@ def add_sinatures():
     result = evidence.add_signatures_by_evi_address(evidence_address)
     return jsonify(result), 200
 
-@app.route("/verifysigner")
+@app.route("/verifysigner", methods=["GET", "POST"])
 def verify():
     data = request.get_json()
     if data is None:

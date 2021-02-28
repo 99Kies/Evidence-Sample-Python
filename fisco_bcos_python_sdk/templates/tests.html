@@ -1,103 +1,35 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <form id="formid" name= "myform" method = 'post' onsubmit = "return checkUser();" >
-    <table width="100%" border="0">
-    <tr>
-    <td width="60" height="40" align="right">用户名 </td>
-    <td><input type="text" value="" class="text2" name = "username" id = "userid"/></td>
-    </tr>
-    <tr>
-    <td width="60" height="40" align="right">密  码 </td>
-    <td><input type="password" value="" class="text2" name = "userpass" id = "userpassid"/></td>
-    </tr>
-    <tr>
-    <td width="60" height="40" align="right"> </td>
-    <td><div class="c4">
-    <input type="submit" value="" class="btn2" />
-    </div></td></tr></table></form>
-    <script>function checkUser(){
-    var result = document.getElementById("userid").value;
-    var password = document.getElementById("userpassid").value;
-    if(result == "" ){
-        alert("用户名不能为空");
-        return false;
-    }
-    if(password == "" ){
-        alert("密码不能为空");
-        return false;
-    }else{
-        alert("登入成功")
-        return true
-    }
-    }
-    </script>
-
-</body>
-</html>
--->
-
-<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <form id="formid" name= "myform" method = 'get' onsubmit = "return checkUser();" >
+    <div class="centered">
+      <span id= "car_control" class= "car" >
+      <button type="button" class="btn btn-primar" onmousedown="getSigners()" onmouseup="">getSigners</button >
+      </span>
+
+      <div>
+          <strong>所有用户的地址</strong>
+          <p id="signers"></p>
+      </div>
+        <span id= "car_control" class= "car" >
+            <button type="button" class="btn btn-primar" onmousedown="getSignerSize()" onmouseup="">getSignerSize</button >
+        </span>
+
+      <div>
+          <strong>用户数量</strong>
+          <p id="signersize"></p>
+      </div>
+
+            <form id="formid" name= "myform" method = 'post' onsubmit = "checkUser();" >
     <table width="100%" border="0">
     <tr>
-    <td width="60" height="40" align="right">用户名 </td>
-    <td><input type="text" value="" class="text2" name = "username" id = "userid"/></td>
-    </tr>
-
-    <tr>
-        <td width="60" height="40" align="right"> </td>
-        <td>
-            <div class="c4">
-                <input type="submit" value="" class="btn" />
-            </div>
-        </td>
-    </tr>
-    </table>
-    </form>
-    <script>function checkUser(){
-    var result = document.getElementById("userid").value;
-    alert(result);
-        var url = "http://127.0.0.1:5000/signer/"+result;
-        var request = new XMLHttpRequest();
-        request.onload = function () {
-            if (request.status === 200) {
-                {#displayContent(request.responseText, "signers")#}
-                alert(request.responseText);
-            }
-        };
-        request.open("GET", url);
-        request.send(null);
-
-    }
-    </script>
-
-</body>
-</html>
--->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <form id="formid" name= "myform" method = 'post' onsubmit = "checkUser();" >
-    <table width="100%" border="0">
-    <tr>
-    <td width="60" height="40" align="right">用户名 </td>
+    <td width="60" height="40" align="right">下标 </td>
     <td><input type="text" value="" class="text2" name = "username" id = "userid"/></td>
     </tr>
     <tr>
@@ -105,8 +37,35 @@
     <td><div class="c4">
     <input type="submit" value="" class="btn2" />
     </div></td></tr></table></form>
+        <strong>地址</strong>
     <p id="indexsigner"></p>
-    <script>function checkUser(){
+
+    </div>
+  <script>
+  function getSigners(){
+  var url = "http://127.0.0.1:5000/signer/lists";
+  var request = new XMLHttpRequest();
+  request.onload = function () {
+      if (request.status === 200) {
+        displayContent(request.responseText, "signers")
+      }
+  };
+  request.open("GET", url);
+  request.send(null)
+  }
+  function getSignerSize(){
+  var url = "http://127.0.0.1:5000/signer/size";
+  var request = new XMLHttpRequest();
+  request.onload = function () {
+      if (request.status === 200) {
+        displayContent(request.responseText, "signersize")
+      }
+  };
+  request.open("GET", url);
+  request.send(null)
+  }
+
+  function checkUser(){
         var result = document.getElementById("userid").value;
         if(result == "" ){
             alert("用户名不能为空");
@@ -130,11 +89,14 @@
             return true
         }
     }
+
+
+
   function displayContent(content, _id) {
       var p = document.getElementById(_id);
       p.innerHTML = content;
   }
-    </script>
+  </script>
 
 </body>
 </html>

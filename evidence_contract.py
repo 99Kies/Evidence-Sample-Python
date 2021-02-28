@@ -34,12 +34,16 @@ class Evidence_Contract:
         }
 
     def verifySigner_by_address(self, address: str):
-        addr = Web3.toChecksumAddress(address)
-        signature = self.client.call(self.to_address, self.contract_abi, "verify", [addr])
-        return {
-            "result": signature[0]
-        }
-
+        try:
+            addr = Web3.toChecksumAddress(address)
+            signature = self.client.call(self.to_address, self.contract_abi, "verify", [addr])
+            return {
+                "result": signature[0]
+            }
+        except:
+            return {
+                "address": False
+            }
 
     def get_signer_by_index(self, index: int):
         signature = self.client.call(self.to_address, self.contract_abi, "getSigner", [index])

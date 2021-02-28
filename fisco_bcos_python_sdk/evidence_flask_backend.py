@@ -4,9 +4,9 @@ from flask_cors import CORS
 import json
 
 app = Flask(__name__)
-contract_address = "0xa2a9d06c3478778e2302bac12115c128334915f4"
-fengfeng_privkey = "d6f8c8f9106835ccc8f8d0bbc4b5bf32ff5f8941e69f9f50d075684d10dda7be"
-fengfeng2_privkey = "619834a32f41fc9dce7809c3063070af3d78fac577a0c12705984eed0b1a3cb"
+contract_address = "0x53d2f44e016dac19dfacf8558ec6271c4d3f567c"
+fengfeng_privkey = "e068297cf199346d4a77f5deb763a44e950593dec25af6a6f643d73490f4b14a"
+fengfeng2_privkey = "9fc25dcb2a006fb9ecf3f2e54c2e6bd741ef84f82b69264a338b400b78c51e62"
 CORS(app)
 
 @app.route("/new_evidence", methods=["GET", "POST"])
